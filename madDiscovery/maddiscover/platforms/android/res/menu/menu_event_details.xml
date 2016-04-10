@@ -1,0 +1,27 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/edit_event_detail"
+        android:orderInCategory="100"
+        android:title="Edit"
+        android:drawable="@drawable/icon"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/delete_event_detail"
+        android:orderInCategory="100"
+        android:title="Delete"
+        android:drawable="@android:drawable/ic_menu_search"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/report_detail"
+        android:orderInCategory="100"
+        android:title="Add Report"
+        android:drawable="@android:drawable/ic_menu_search"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/images"
+        android:orderInCategory="100"
+        android:title="Add Images"
+        app:showAsAction="never"/>
+</menu>

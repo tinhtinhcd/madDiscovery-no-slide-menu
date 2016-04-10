@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/save_edit"
+        android:orderInCategory="100"
+        android:title="Save"
+        android:drawable="@drawable/icon"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/cancel_edit"
+        android:orderInCategory="100"
+        android:title="Cancel"
+        android:drawable="@android:drawable/ic_menu_search"
+        app:showAsAction="never"/>
+
+</menu>

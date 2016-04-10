@@ -1,0 +1,30 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/create_event"
+        android:orderInCategory="100"
+        android:title="Create Event"
+        android:drawable="@drawable/icon"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/delete_event"
+        android:orderInCategory="100"
+        android:title="Delete selected Events"
+        android:drawable="@drawable/icon"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/edit_event"
+        android:orderInCategory="100"
+        android:title="Edit selected Event"
+        android:drawable="@drawable/icon"
+        app:showAsAction="never"/>
+    <item
+        android:icon="@android:drawable/ic_search_category_default"
+        android:id="@+id/search_event"
+        android:orderInCategory="100"
+        android:title="Search"
+        android:drawable="@android:drawable/ic_menu_search"
+        app:showAsAction="never"/>
+
+</menu>

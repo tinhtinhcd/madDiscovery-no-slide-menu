@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">MadDiscovery</string>
+    <string name="launcher_name">@string/app_name</string>
+    <string name="activity_name">@string/launcher_name</string>
+    <string-array name="planets_array">
+        <item>Event</item>
+        <item>Venue</item>
+        <item>Organizers</item>
+    </string-array>
+    <string name="drawer_open"> </string>
+    <string name="drawer_close">  </string>
+    <string name="action_websearch"> </string>
+    <string name="app_not_available"> </string>
+
+    <string name="create_eventSuccess"> Created success </string>
+
+</resources>

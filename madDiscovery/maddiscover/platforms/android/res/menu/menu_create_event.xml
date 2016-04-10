@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/save"
+        android:orderInCategory="100"
+        android:title="Save"
+        android:drawable="@drawable/icon"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/save_more"
+        android:orderInCategory="100"
+        android:title="Save and create more"
+        android:drawable="@android:drawable/ic_menu_search"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/cancel"
+        android:orderInCategory="100"
+        android:title="Cancel"
+        android:drawable="@android:drawable/ic_menu_search"
+        app:showAsAction="never"/>
+
+</menu>
