@@ -9,6 +9,12 @@
     "installed_plugins": {
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.anhlt.maddiscover"
+        },
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "com.anhlt.maddiscover"
+        },
+        "cordova-plugin-sqlite": {
+            "PACKAGE_NAME": "com.anhlt.maddiscover"
         }
     },
     "dependent_plugins": {}

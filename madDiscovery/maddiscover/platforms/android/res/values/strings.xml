@@ -8,11 +8,13 @@
         <item>Venue</item>
         <item>Organizers</item>
     </string-array>
-    <string name="drawer_open"> </string>
-    <string name="drawer_close">  </string>
-    <string name="action_websearch"> </string>
-    <string name="app_not_available"> </string>
-
+    <string name="drawer_open">
+    </string>
+    <string name="drawer_close">
+    </string>
+    <string name="action_websearch">
+    </string>
+    <string name="app_not_available">
+    </string>
     <string name="create_eventSuccess"> Created success </string>
-
 </resources>
