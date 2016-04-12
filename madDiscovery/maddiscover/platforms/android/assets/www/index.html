@@ -2,19 +2,159 @@
 
 <html>
 <head>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
     <link rel="stylesheet" href="css/index.css">
     <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery-1.12.2.js"></script>
     <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
-    <title>Hello World</title>
+    <script type="text/javascript" src="js/index.js"></script>
+    <title>Create Event</title>
+
 </head>
 <body>
-    <div class="container">
-        <h1>Mad Discovery</h1>
+<div data-role="page" id="list">
+    <div data-role="header">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#list">List Event</a></li>
+                <li><a href="#create">Create Event</a></li>
+            </ul>
+        </div>
     </div>
-<script type="text/javascript" src="js/index.js"></script>
+
+    <div data-role="main" class="ui-content">
+        <h1>List Event</h1>
+        <div id="listEvent" style="margin:10px"></div>
+    </div>
+</div>
+
+<div data-role="page" id="create">
+    <div data-role="header">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#list">List Event</a></li>
+                <li><a href="#create">Create Event</a></li>
+            </ul>
+        </div>
+        <!--     <h1>Welcome To My Homepage 1</h1> -->
+    </div>
+    <h1>Create new Event</h1>
+    <div id="create-from">
+        <div data-role="content">
+            <div class="ename" data-role="fieldcontain">
+                <label for="ename"> Event Name: </label>
+                <input name="ename" id="ename" placeholder="" value="" data-mini="true" type="text">
+            </div>
+            <div class="location" data-role="fieldcontain">
+                <label for="location"> Location </label>
+                <input name="location" id="location" placeholder="" value="" type="text">
+            </div>
+            <div class="date" data-role="fieldcontain">
+                <label for="date"> Date of Event </label>
+                <input name="date" id="date" placeholder="" value="" type="date">
+            </div>
+            <div class="time" data-role="fieldcontain">
+                <label for="time"> Start Time </label>
+                <input name="time" id="time" placeholder="" value="" type="time">
+            </div>
+            <div class="org" data-role="fieldcontain">
+                <label for="org"> Organizer </label>
+                <input name="org" id="org" placeholder="" value="" type="text">
+            </div>
+
+            <div class="footer">
+                <table >
+                    <tr >
+                        <td ><input id="save" value="Save" type="button" name="save" onclick="saveNew()"></td>
+                        <td ><input id="cancel" value="Cancel" type="button" name="cancel" onclick="cancelCreate()"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div data-role="page" id="details">
+
+    <div id="details-from">
+        <table width="100%"><tbody>
+        <tr width="100%">
+            <td width="35%"></td>
+            <td width="65%">  </td>
+        </tr>
+        <tr width="100%">
+            <td width="35%"><label> Event Name: </label></td>
+            <td width="65%"><label name="ename" id="ename_de" /></td>
+        </tr>
+        <tr width="100%">
+            <td width="35%"><label> Location </label></td>
+            <td width="65%"><label name="location" id="location_de" /></td>
+        </tr>
+        <tr width="100%">
+            <td width="35%"><label> Date of Event </label></td>
+            <td width="65%"><label name="date" id="date_de" /></td>
+        </tr>
+        <tr width="100%">
+            <td width="35%"><label> Start Time </label></td>
+            <td width="65%"><label name="time" id="time_de" /></td>
+        </tr>
+        <tr width="100%">
+            <td width="35%"><label> Organizer </label></td>
+            <td width="65%"><label name="org" id="org_de" /></td>
+        </tr>
+        </tbody></table>
+        <div class="footer">
+            <table >
+                <tr >
+                    <td width="25%"><input id="edit" value="Edit" type="button" name="edit" onclick="loadEdit()"></td>
+                    <td width="25%"><input id="delete" value="Delete" type="button" name="delete" onclick="showConfirm()"></td>
+                    <td width="25%"><input id="photo" value="Add Photo" type="button" name="photo" onclick="addPhoto()"></td>
+                    <td width="25%"><input id="report" value="Add report" type="button" name="report" onclick="report()"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<div data-role="page" id="update">
+    <h1>Edit Event</h1>
+    <div id="update-from">
+        <div data-role="content">
+            <div class="ename" data-role="fieldcontain">
+                <label for="ename"> Event Name: </label>
+                <input name="ename" id="ename_up" placeholder="" value="" data-mini="true" type="text">
+            </div>
+            <div class="location" data-role="fieldcontain">
+                <label for="location"> Location </label>
+                <input name="location" id="location_up" placeholder="" value="" type="text">
+            </div>
+            <div class="date" data-role="fieldcontain">
+                <label for="date"> Date of Event </label>
+                <input name="date" id="date_up" placeholder="" value="" type="date">
+            </div>
+            <div class="time" data-role="fieldcontain">
+                <label for="time"> Start Time </label>
+                <input name="time" id="time_up" placeholder="" value="" type="time">
+            </div>
+            <div class="org" data-role="fieldcontain">
+                <label for="org"> Organizer </label>
+                <input name="org" id="org_up" placeholder="" value="" type="text">
+            </div>
+
+            <div class="footer">
+                <table width="">
+                    <tr width="">
+                        <td width=""><input id="save_up" value="Save" type="button" name="save" onclick="update()"></td>
+                        <td width=""><input id="cancel_up" value="Cancel" type="button" name="cancel" onclick="cancelEdit()"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
