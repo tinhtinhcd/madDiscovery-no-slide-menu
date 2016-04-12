@@ -101,12 +101,21 @@
             <td width="65%"><label name="org" id="org_de" /></td>
         </tr>
         <tr width="100%">
+            <td width="35%"><label> Images </label></td>
+            <td width="65%"> <div id="images" width="95%"></div> </td>
+        </tr>
+        <tr width="100%">
             <td width="35%"><label> Reports </label></td>
             <td width="65%"></td>
         </tr>
         <tr width="100%">
             <td width="35%"><label> </label></td>
-            <td width="65%"> <div id="reports"></div></td>
+            <td width="65%"> <div id="reports"></div>
+                <div data-role="popup" id="myPopup">
+                    <a href="#details" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                    <img src="" id="popup" style="width:800px;height:400px;" alt="">
+                </div>
+            </td>
         </tr>
         </tbody></table>
         <div class="footer">

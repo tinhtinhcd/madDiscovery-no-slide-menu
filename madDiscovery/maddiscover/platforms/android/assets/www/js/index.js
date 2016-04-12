@@ -8,14 +8,14 @@ function onDeviceReady() {
 }
 
 function initDB() {
-	db = window.sqlitePlugin.openDatabase("mad_discover_phonegap.db", "8.0", "madDiscovery", 200000);
+	db = window.sqlitePlugin.openDatabase("mad_discover_phonegap.db", "9.0", "madDiscovery", 200000);
 	db.transaction(populateDB, populateError, populateSuccess);
 }
 
 function populateDB(tx) {
 	tx.executeSql("CREATE TABLE IF NOT EXISTS `events` (`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `venueId` VARCHAR(255), `eventName` VARCHAR(255), `createDate` DATETIME, `startDate` DATETIME, `dateOfEvent` VARCHAR(255), `organizer` BIGINT, `remark` VARCHAR(255));");
     tx.executeSql("CREATE TABLE IF NOT EXISTS `report` (`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `eventId` VARCHAR(255), `text` VARCHAR(10000));");
-//    tx.executeSql("CREATE TABLE IF NOT EXISTS `venue` (`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `name` VARCHAR(255), `address` VARCHAR(255), `latitude` DOUBLE, `longitude` DOUBLE, `postal_code` VARCHAR(255) );;");
+	tx.executeSql("CREATE TABLE IF NOT EXISTS `image` (`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `eventId` VARCHAR(255), `url` VARCHAR(10000));");
 }
 
 function populateSuccess(tx) {
@@ -32,6 +32,7 @@ function errorCB(err) {
 function eventDetails(){
     getEventDetail("details");
     getReportList();
+    loadImage();
 }
 
 function eventUpdate(){
@@ -333,5 +334,60 @@ function sqlReport(tx){
 			var text = row['text'];
 			listView.innerHTML += '<div class="divlist" id="' + row['id'] + '">'+row["text"]+'</div>';
 		};
-	},errorCB)
+	},errorCB);
+}
+
+function addPhoto(){
+	window.imagePicker.getPictures(
+    	function(results) {
+    		var rs="";
+    		for (var i = 0; i < results.length; i++) {
+				console.log('Image URI: ' + results[i]);
+				rs+=results[i]+",";
+            }
+            window.localStorage.setItem("urlImg",rs.substring(0, rs.lastIndexOf(",")));
+    		saveImage();
+    	}, function (error) {
+    		console.log('Error: ' + error);
+    	}
+    );
+}
+
+function saveImage(){
+	db.transaction(sqlSaveImg,errorCB,loadImage);
+}
+
+function sqlSaveImg(tx){
+	var eventId = window.localStorage.getItem("eventId");
+	var image = window.localStorage.getItem("urlImg").split(",");
+	for (var i = 0; i < image.length; i++) {
+    	console.log('Image URI: ' + image[i]);
+    	tx.executeSql("Insert into image (eventId,url) values("+eventId+",'"+image[i]+"')", [],null, errorCB);
+    }
+}
+
+function loadImage(){
+	db.transaction(loadEventImages,errorCB);
+}
+
+function loadEventImages(tx){
+	var eventId = window.localStorage.getItem("eventId");
+	tx.executeSql("Select * from image where eventId="+eventId,[],function(tx,results){
+		var length = results.rows.length;
+		var listView = document.getElementById('images');
+		listView.innerHTML = "";
+
+		for (var i=0; i<length; i++) {
+			var row = results.rows.item(i);
+			console.log(row['url']);
+			var sr = row['url'];
+			listView.innerHTML += "<a href='#myPopup' data-rel='popup' data-position-to='window' id='zoomImg'"
+			+"> <img src='"+sr+"' height='60px' width='60px' onclick='setImageSource(this.src)'/></a>";
+		};
+
+	},errorCB);
+}
+
+function setImageSource(_src){
+	document.getElementById("popup").src = _src;
 }
