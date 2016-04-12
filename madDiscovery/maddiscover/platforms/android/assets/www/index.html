@@ -42,7 +42,7 @@
     </div>
     <h1>Create new Event</h1>
     <div id="create-from">
-        <div data-role="content">
+        <div data-role="main" class="ui-content">
             <div class="ename" data-role="fieldcontain">
                 <label for="ename"> Event Name: </label>
                 <input name="ename" id="ename" placeholder="" value="" data-mini="true" type="text">
@@ -65,20 +65,16 @@
             </div>
 
             <div class="footer">
-                <table >
-                    <tr >
-                        <td ><input id="save" value="Save" type="button" name="save" onclick="saveNew()"></td>
-                        <td ><input id="cancel" value="Cancel" type="button" name="cancel" onclick="cancelCreate()"></td>
-                    </tr>
-                </table>
+                <input id="save" value="Save" type="button" name="save" onclick="saveNew()">
+                <input id="cancel" value="Cancel" type="button" name="cancel" onclick="cancelCreate()">
             </div>
         </div>
     </div>
 </div>
 
 <div data-role="page" id="details">
-
-    <div id="details-from">
+    <div data-role="main" class="ui-content">
+        <h1>Event Details</h1>
         <table width="100%"><tbody>
         <tr width="100%">
             <td width="35%"></td>
@@ -104,24 +100,28 @@
             <td width="35%"><label> Organizer </label></td>
             <td width="65%"><label name="org" id="org_de" /></td>
         </tr>
+        <tr width="100%">
+            <td width="35%"><label> Reports </label></td>
+            <td width="65%"></td>
+        </tr>
+        <tr width="100%">
+            <td width="35%"><label> </label></td>
+            <td width="65%"> <div id="reports"></div></td>
+        </tr>
         </tbody></table>
         <div class="footer">
-            <table >
-                <tr >
-                    <td width="25%"><input id="edit" value="Edit" type="button" name="edit" onclick="loadEdit()"></td>
-                    <td width="25%"><input id="delete" value="Delete" type="button" name="delete" onclick="showConfirm()"></td>
-                    <td width="25%"><input id="photo" value="Add Photo" type="button" name="photo" onclick="addPhoto()"></td>
-                    <td width="25%"><input id="report" value="Add report" type="button" name="report" onclick="report()"></td>
-                </tr>
-            </table>
+            <input id="edit" value="Edit" type="button" name="edit" onclick="loadEdit()">
+            <input id="delete" value="Delete" type="button" name="delete" onclick="showConfirm()">
+            <input id="photo" value="Add Photo" type="button" name="photo" onclick="addPhoto()">
+            <input id="report" value="Add report" type="button" name="report" onclick="report()">
         </div>
     </div>
 
 </div>
 
 <div data-role="page" id="update">
-    <h1>Edit Event</h1>
-    <div id="update-from">
+    <div data-role="main" class="ui-content">
+        <h1>Edit Event</h1>
         <div data-role="content">
             <div class="ename" data-role="fieldcontain">
                 <label for="ename"> Event Name: </label>
@@ -145,12 +145,8 @@
             </div>
 
             <div class="footer">
-                <table width="">
-                    <tr width="">
-                        <td width=""><input id="save_up" value="Save" type="button" name="save" onclick="update()"></td>
-                        <td width=""><input id="cancel_up" value="Cancel" type="button" name="cancel" onclick="cancelEdit()"></td>
-                    </tr>
-                </table>
+                <input id="save_up" value="Save" type="button" name="save" onclick="update()">
+                <input id="cancel_up" value="Cancel" type="button" name="cancel" onclick="cancelEdit()">
             </div>
         </div>
     </div>

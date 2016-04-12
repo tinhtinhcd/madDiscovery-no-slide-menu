@@ -113,3 +113,15 @@ h1 {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
 }
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 95%;
+    display: table;
+    table-layout: fixed;
+}
+
+.footer input{
+    display: table-cell;
+}

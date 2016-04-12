@@ -13,8 +13,8 @@ function initDB() {
 }
 
 function populateDB(tx) {
-	tx.executeSql("CREATE TABLE IF NOT EXISTS `events` (`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `venueId` BIGINT, `eventName` VARCHAR(255), `createDate` DATETIME, `startDate` DATETIME, `dateOfEvent` VARCHAR(255), `organizer` BIGINT, `remark` VARCHAR(255));");
-//    tx.executeSql("CREATE TABLE IF NOT EXISTS `organizers` (`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `name` VARCHAR(255), `mobile` VARCHAR(255), `email` VARCHAR(255), `address` VARCHAR(255), `about` VARCHAR(10000) );");
+	tx.executeSql("CREATE TABLE IF NOT EXISTS `events` (`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `venueId` VARCHAR(255), `eventName` VARCHAR(255), `createDate` DATETIME, `startDate` DATETIME, `dateOfEvent` VARCHAR(255), `organizer` BIGINT, `remark` VARCHAR(255));");
+    tx.executeSql("CREATE TABLE IF NOT EXISTS `report` (`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `eventId` VARCHAR(255), `text` VARCHAR(10000));");
 //    tx.executeSql("CREATE TABLE IF NOT EXISTS `venue` (`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `name` VARCHAR(255), `address` VARCHAR(255), `latitude` DOUBLE, `longitude` DOUBLE, `postal_code` VARCHAR(255) );;");
 }
 
@@ -31,6 +31,7 @@ function errorCB(err) {
 
 function eventDetails(){
     getEventDetail("details");
+    getReportList();
 }
 
 function eventUpdate(){
@@ -280,4 +281,57 @@ function sqlDelete(tx){
 
 function delSuccess(tx){
 	window.location.href = "#list";
+}
+
+function report(){
+	navigator.notification.prompt(
+		'',  // message
+		addReport,              // callback to invoke with index of button pressed
+		'Add Report',            // title
+		['OK','Cancel']          // buttonLabels
+	);
+}
+
+function addReport(results){
+	if(results.buttonIndex==1){
+		if(results.input1.length ==0 )
+			alert("Please enter report");
+		else{
+			window.localStorage.setItem("report",results.input1);
+			saveReport();
+		}
+	}
+
+}
+
+function saveReport(){
+	db.transaction(sqlAddReport,errorCB,addReportSuccess);
+}
+
+function sqlAddReport(tx){
+	var eventId = window.localStorage.getItem("eventId");
+	var report = window.localStorage.getItem("report");
+	tx.executeSql("Insert into report (eventId,text) values("+eventId+",'"+report+"')", [],null, errorCB);
+}
+
+function addReportSuccess(){
+	getReportList();
+}
+
+function getReportList(){
+	db.transaction(sqlReport,errorCB);
+}
+
+function sqlReport(tx){
+	var eventId = window.localStorage.getItem("eventId");
+	tx.executeSql("Select * from report where eventId="+eventId,[],function(tx,results){
+		var length = results.rows.length;
+		var listView = document.getElementById('reports');
+		listView.innerHTML = "";
+		for (var i=0; i<length; i++) {
+			var row = results.rows.item(i);
+			var text = row['text'];
+			listView.innerHTML += '<div class="divlist" id="' + row['id'] + '">'+row["text"]+'</div>';
+		};
+	},errorCB)
 }
