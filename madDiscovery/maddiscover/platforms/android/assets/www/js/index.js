@@ -391,3 +391,33 @@ function loadEventImages(tx){
 function setImageSource(_src){
 	document.getElementById("popup").src = _src;
 }
+
+function searchE(){
+	navigator.notification.prompt(
+		'event name, location, organizer',  // message
+		searchEvent,              // callback to invoke with index of button pressed
+		'Search Event',            // title
+		['Search','Cancel']          // buttonLabels
+    );
+}
+
+function searchEvent(results){
+	if(results.buttonIndex==1){
+		if(results.input1.length ==0 )
+			alert("Please enter some text");
+		else{
+			window.localStorage.setItem("keyword",results.input1);
+			doSearch();
+		}
+	}
+}
+
+function doSearch(){
+	db.transaction(querySearch, errorCB);
+}
+
+function querySearch(tx){
+	window.location.href = "#list";
+	var keyword = window.localStorage.getItem("keyword");
+	tx.executeSql("SELECT * FROM events WHERE eventName like '%"+keyword+"%' or organizer like '%"+keyword+"%' or venueId like '%"+keyword+"%'  ORDER BY eventName ", [], querySuccess, errorCB);
+}
